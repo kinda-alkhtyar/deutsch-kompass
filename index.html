@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="Deutsch Kompass — منصة تفاعلية لتعلم الألمانية من A1 إلى B1.">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./style.css">
+<title>Deutsch Kompass</title>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brandmark">DK</div><div><b>Deutsch Kompass</b><small>Deutsch lernen. Sicher sprechen.</small></div></div>
+  <div class="top-actions"><button id="searchBtn" class="icon">⌕</button><button id="themeBtn" class="icon">◐</button><button id="menuBtn" class="icon mobile">☰</button></div>
+</header>
+
+<div class="layout">
+<aside id="sidebar" class="sidebar">
+  <div class="level-tabs"><button class="lv active" data-level="all">All</button><button class="lv" data-level="A1">A1</button><button class="lv" data-level="A2">A2</button><button class="lv" data-level="B1">B1</button></div>
+  <nav>
+    <button class="nav active" data-tab="home">⌂ <span>الرئيسية</span></button>
+    <button class="nav" data-tab="path">◫ <span>مسار التعلم</span></button>
+    <button class="nav" data-tab="vocab">Aa <span>الكلمات والجمل</span></button>
+    <button class="nav" data-tab="daily">☀ <span>الحياة اليومية</span></button>
+    <button class="nav" data-tab="grammar">§ <span>القواعد</span></button>
+    <button class="nav" data-tab="pronunciation">◉ <span>النطق والكلام</span></button>
+    <button class="nav" data-tab="practice">◎ <span>التدريبات</span></button>
+    <button class="nav" data-tab="exam">◇ <span>Exam Center</span></button>
+    <button class="nav" data-tab="review">↻ <span>مراجعة ذكية</span></button>
+    <button class="nav" data-tab="levels">★ <span>امتحانات المستويات</span></button>
+  </nav>
+  <div class="side-progress"><small>التقدم العام</small><div class="bar"><i id="sideBar"></i></div><div class="row"><b id="sidePct">0%</b><span id="sideKnown">0/1500</span></div></div>
+</aside>
+
+<main class="content">
+<section id="home" class="panel active">
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">A1 → B1 • WÖRTER • GRAMMATIK • SPRECHEN</span>
+      <h1>تعلم الألمانية لتستخدمها فعلًا، لا لتحفظها فقط.</h1>
+      <p>1500 كلمة وعبارة عملية، أمثلة بثلاث مستويات مع شرح عربي، قواعد مرتبة، نطق، حياة يومية، وصف صور، محادثة وامتحان مستقل لكل مستوى.</p>
+      <div class="actions"><button onclick="openTab('path')">ابدأ الخطة</button><button class="secondary" onclick="openTab('vocab')">استكشف الكلمات</button></div>
+      <div class="hero-stats"><span><b id="heroWords">1500</b> Wörter & Wendungen</span><span><b id="heroRules">0</b> Regeln</span><span><b>3</b> Level-Prüfungen</span></div>
+    </div>
+    <div class="hero-visual">
+      <div class="speech-orbit"><div class="core"><b>SPRECHEN</b><small>الهدف النهائي</small></div><span class="orb o1">Hören</span><span class="orb o2">Wörter</span><span class="orb o3">Grammatik</span><span class="orb o4">Schreiben</span></div>
+    </div>
+  </div>
+  <div class="dash-grid">
+    <article class="dash"><span class="tag">TODAY</span><h3>روتين يومي ذكي</h3><p>10 كلمات → قاعدة واحدة → 5 دقائق نطق → تدريب قصير.</p></article>
+    <article class="dash"><span class="tag">GOAL</span><h3>من الفهم إلى الكلام</h3><p>كل قسم مبني ليحوّل المفردة من معرفة سلبية إلى استخدام فعلي.</p></article>
+    <article class="dash"><span class="tag">EXAM</span><h3>A1 · A2 · B1</h3><p>لكل مستوى امتحان نهائي منفصل.</p></article>
+  </div>
+</section>
+
+<section id="path" class="panel"><div class="page-head"><span class="eyebrow">LEARNING PATH</span><h2>خطة التعلم</h2><p>تعلم على شكل وحدات بدل حفظ قوائم طويلة.</p></div><div id="unitGrid" class="unit-grid"></div></section>
+
+<section id="vocab" class="panel">
+  <div class="page-head split"><div><span class="eyebrow">1500 WÖRTER & WENDUNGEN</span><h2>الكلمات والجمل</h2><p>كل مدخل في نفس الصفحة: معنى + استخدام + A1 + A2 + B1 + ترجمة عربية.</p></div><input id="wordSearch" placeholder="ابحث عن كلمة أو معنى أو موضوع..."></div>
+  <div class="filters"><button class="chip active" data-filter="all">الكل</button><button class="chip" data-filter="known">محفوظة</button><button class="chip" data-filter="saved">مفضلة</button><button class="chip" data-filter="hard">صعبة</button></div>
+  <div id="wordGrid" class="vocab-list"></div>
+</section>
+
+<section id="daily" class="panel">
+  <div class="page-head"><span class="eyebrow">ALLTAG</span><h2>الحياة اليومية</h2><p>أهم المفردات والجمل حسب الموقف: البيت، التسوق، الطبيب، الدراسة، العمل، المواصلات، المواعيد، التواصل…</p></div>
+  <div id="themeTabs" class="theme-tabs"></div><div id="dailyGrid" class="vocab-list"></div>
+</section>
+
+<section id="grammar" class="panel"><div class="page-head"><span class="eyebrow">GRAMMATIK</span><h2>القواعد بالترتيب</h2><p>من A1 إلى B1 بطريقة قابلة للمراجعة.</p></div><div id="grammarGrid" class="grammar-grid"></div></section>
+
+<section id="pronunciation" class="panel">
+  <div class="page-head"><span class="eyebrow">AUSSPRACHE & SPRECHEN</span><h2>من النطق إلى الكلام</h2><p>اسمع، كرر، ثم استخدم الجملة بصوتك. الهدف هو الكلام التلقائي تدريجيًا.</p></div>
+  <div class="pron-grid">
+    <article class="pron-card"><h3>1. Hören</h3><p>اسمع الكلمة والجملة أكثر من مرة.</p></article>
+    <article class="pron-card"><h3>2. Nachsprechen</h3><p>كرر الجملة بنفس الإيقاع.</p></article>
+    <article class="pron-card"><h3>3. Shadowing</h3><p>تكلم مع الصوت تقريبًا في نفس الوقت.</p></article>
+    <article class="pron-card"><h3>4. Frei sprechen</h3><p>استعمل نفس التركيب بجملة من عندك.</p></article>
+  </div>
+  <div id="pronList" class="grammar-grid"></div>
+  <div class="stage"><h3>Speaking Sprint</h3><p>اختر 5 كلمات من اليوم وتكلم دقيقة كاملة باستخدامها. لا تهتم بالكمال؛ ركز على الاستمرار والوضوح.</p><button onclick="startSpeechTimer(60)">ابدأ دقيقة</button><div id="speechTimer" class="timer"></div></div>
+</section>
+
+<section id="practice" class="panel">
+  <div class="page-head"><span class="eyebrow">PRACTICE LAB</span><h2>التدريبات</h2><p>Flashcards، كتابة من الصوت، Artikel، ترتيب الجمل، تصريف ومراجعة أخطاء.</p></div>
+  <div class="practice-grid">
+    <button class="practice-card" data-practice="flash"><span>▣</span><b>Flashcards</b><small>حفظ واسترجاع</small></button>
+    <button class="practice-card" data-practice="dictation"><span>🎧</span><b>اكتب من الصوت</b><small>Hören + Schreiben</small></button>
+    <button class="practice-card" data-practice="article"><span>der</span><b>Artikel</b><small>der / die / das</small></button>
+    <button class="practice-card" data-practice="reorder"><span>↔</span><b>ترتيب الجملة</b><small>Satzbau</small></button>
+    <button class="practice-card featured" data-practice="mega"><span>★</span><b>Mega Test</b><small>اختبار مختلط</small></button>
+  </div><div id="practiceStage" class="stage"><div class="empty">اختر تدريبًا.</div></div>
+</section>
+
+<section id="exam" class="panel">
+  <div class="page-head"><span class="eyebrow">EXAM CENTER</span><h2>مركز الامتحان</h2><p>Schreiben · Bildbeschreibung · Sprechen · Lesen · Österreich & Werte.</p></div>
+  <div class="exam-tabs"><button class="exam-tab active" data-exam="picture">Bildbeschreibung</button><button class="exam-tab" data-exam="email">E-Mail</button><button class="exam-tab" data-exam="speaking">Sprechen</button><button class="exam-tab" data-exam="reading">Lesen</button><button class="exam-tab" data-exam="austria">Österreich & Werte</button></div>
+  <div id="examStage" class="stage"></div>
+</section>
+
+<section id="review" class="panel"><div class="page-head"><span class="eyebrow">SMART REVIEW</span><h2>مراجعة ذكية</h2><p>الكلمات الصعبة والمفضلة والأخطاء في مكان واحد.</p></div><div id="reviewSummary" class="review-summary"></div><div id="reviewGrid" class="vocab-list"></div></section>
+
+<section id="levels" class="panel"><div class="page-head"><span class="eyebrow">LEVEL EXAMS</span><h2>امتحان مستقل لكل مستوى</h2><p>لا تنتقل للمستوى التالي قبل أن تعرف نقاط قوتك وضعفك.</p></div><div id="levelExamGrid" class="exam-level-grid"></div></section>
+
+<footer><div><b>Deutsch Kompass</b><span>Deutsch lernen. Sicher sprechen.</span></div><p>Developed & Designed by Kinda Alhidyar · Alle Rechte vorbehalten. © 2026</p></footer>
+</main>
+</div>
+
+<nav class="bottom mobile"><button class="active" data-tab="home">⌂<small>Home</small></button><button data-tab="vocab">Aa<small>Wörter</small></button><button data-tab="daily">☀<small>Alltag</small></button><button data-tab="practice">◎<small>Üben</small></button><button data-tab="levels">★<small>Prüfung</small></button></nav>
+
+<div id="overlay" class="overlay hidden"><div class="modal"><div class="modal-head"><input id="globalSearch" placeholder="ابحث في الكلمات والقواعد..."><button id="closeOverlay" class="icon">×</button></div><div id="searchResults"></div></div></div>
+<script src="./data.js"></script><script src="./app.js"></script>
+</body></html>
